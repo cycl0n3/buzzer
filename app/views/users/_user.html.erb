@@ -1,12 +1,22 @@
 <td>
-  <%= link_to user.email, user %>
+    <%= link_to user.email, user %>
 </td>
+
 <td>
-  <%= form_for(user) do |f| %>
-    <%= f.select(:role, User.roles.keys.map {|role| [role.titleize,role]}) %>
-    <%= f.submit 'Change Role', :class => 'button-xs' %>
+  <%= form_for user, :html => { :class => 'form-inline' } do |f| %>
+      <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+        <img src="<%= user.avatar.file.nil? ? image_path('profile') : image_path('profile') %>" width="100" height="100">
+      </div>
+      <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+        <%= f.select(:role, User.roles.keys.map {|role| [role.titleize, role]}, :html => {  }) %>
+      </div>
+      <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+        <%= user.uuid %>
+      </div>
+      <%= f.submit 'Change Role', :class => 'button-xs' %>
   <% end %>
 </td>
+
 <td>
-  <%= link_to("Delete user", user_path(user), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'button-xs') unless user == current_user %>
+    <%= link_to('Delete user', user_path(user), :data => { :confirm => 'Are you sure?' }, :method => :delete, :class => 'button-xs btn btn-danger') unless user == current_user %>
 </td>
