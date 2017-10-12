@@ -13,4 +13,7 @@
 //= require jquery
 //= require rails-ujs
 //= require bootstrap-sprockets
+//= require angular
+//= require react
+//= require react_ujs
 //= require_tree .
